@@ -17,7 +17,15 @@
 		}
 	}	
 
- // delete task
+	// update task
+if (isset($_GET['edit_task'])) {
+	$id = $_GET['edit_task'];
+
+	mysqli_query($db, "UPDATE FROM tasks WHERE id=$id");
+	header('location: index.php');
+}
+
+// delete task
 if (isset($_GET['del_task'])) {
 	$id = $_GET['del_task'];
 
@@ -25,6 +33,10 @@ if (isset($_GET['del_task'])) {
 	header('location: index.php');
 }
   ?>
+ 
+
+ 
+
  
  
  <!DOCTYPE html>
@@ -63,6 +75,9 @@ if (isset($_GET['del_task'])) {
 			<tr>
 				<td> <?php echo $i; ?> </td>
 				<td class="task"> <?php echo $row['task']; ?> </td>
+				<td class="edit"> 
+					<a href="index.php?edit_task=<?php echo $row['id'] ?>">Edit</a> 
+				</td>
 				<td class="delete"> 
 					<a href="index.php?del_task=<?php echo $row['id'] ?>">x</a> 
 				</td>
